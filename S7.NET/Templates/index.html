@@ -21,9 +21,9 @@
         <a href="#" class="w3-bar-item w3-button w3-gray w3-border-right material-icons">cast</a>
 
         <div class="w3-quarter w3-padding w3-right" style="width:15%">
-            <span class="tag" id="DB10.DBW10">HH</span>:
+            <!--<span class="tag" id="DB10.DBW10">HH</span>:
             <span class="tag" id="DB10.DBW12">mm</span>:
-            <span class="tag" id="DB10.DBW14">ss</span>
+            <span class="tag" id="DB10.DBW14">ss</span>-->
             <span class="w3-right tag" id="DB10.DBW8">TTT</span>
         </div>
 
@@ -63,11 +63,11 @@
                 </tr>
                 <tr class="w3-border-top">
                     <td>Raumtemperatur</td>
-                    <td><input type="number" class="w3-black w3-input" value="23" />°C</td>
-                    <td><input type="number" class="w3-sand w3-input" value="23" />°C</td>
+                    <td><input type="number" id="DB10.DBW10" class="tag w3-black w3-input" value="00" />°C</td>
+                    <td><input type="number" id="DB10.DBW12" class="tag w3-sand w3-input" value="00" />°C</td>
                     <td>Abtauende</td>
-                    <td><input type="number" class="w3-black w3-input" value="23" />°C</td>
-                    <td><input type="number" class="w3-sand w3-input w3-threequarter" value="23" />°C</td>
+                    <td><input type="number" id="DB10.DBW14" class="tag w3-black w3-input" value="00" />°C</td>
+                    <td><input type="number" id="DB10.DBW16" class="tag w3-sand w3-input w3-threequarter" value="00" />°C</td>
                 </tr>
                 <tr class="w3-border-top">
                     <td>Hysterese</td>
@@ -76,52 +76,57 @@
                 </tr>
             </table>
         </div>
+    </div>
 
-        <!--<div id="demo">
-            <h2>Let AJAX change this text</h2>
-        </div>-->
+    <div id="demo">
+        <h2 class="w3-right-align">Let AJAX change this text</h2>
+    </div>
 
 
 
-        <!--<div>
-            <input type="button" value="Load Names" onclick="loadNames()" />
-        </div>-->
+    <!--<div>
+        <input type="button" value="Load Names" onclick="loadNames()" />
+    </div>-->
 
-        <script>
-            setInterval(myTimer, 1000);
+    <script>
+        setInterval(myTimer, 1000);
 
-            function myTimer() {
-                loadNames();
+        function myTimer() {
+            loadNames();
+        }
+
+        async function loadNames() {
+            //ItemNames aus DOM lesen
+            var x = document.getElementsByClassName("tag");
+            const data = [];
+
+            for (let i = 0; i < x.length; i++) {
+                data.push(x[i].id);
             }
 
-            async function loadNames() {
-                //ItemNames aus DOm lesen
-                var x = document.getElementsByClassName("tag");
-                const data = [];
+            //Leseanfrage senden
+            const response = await fetch('/api', {
+                method: 'POST',
+                body: JSON.stringify(data)
+            });
+            const responseText = await response.text()
 
-                for (let i = 0; i < x.length; i++) {
-                    data.push(x[i].id);
-                }
+            //Ergebnis verarbeiten
+            const myArr = JSON.parse(responseText);
 
-                //Leseanfrage senden
-                const response = await fetch('/api', {
-                    method: 'POST',
-                    body: JSON.stringify(data)
-                });
-                const responseText = await response.text()
+            for (let i = 0; i < myArr.length; i++) {
+                const tag = myArr[i];
+                var obj = document.getElementById(tag.Name);
 
-                //Ergebnis verarbeiten
-                const myArr = JSON.parse(responseText);
-
-                for (let i = 0; i < myArr.length; i++) {
-                    const obj = myArr[i];
-
-                    document.getElementById(obj.Name).innerHTML = obj.Value;
-                }
-
-                //document.getElementById("demo").innerHTML = responseText;
+                if (obj.tagName == "INPUT") {
+                    obj.value = tag.Value; }
+                else {
+                    obj.innerHTML = tag.Value;}
             }
-        </script>
+
+            document.getElementById("demo").innerHTML = responseText;
+        }
+    </script>
 
 
 </body>
