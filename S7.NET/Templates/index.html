@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Test2</title>
+</head>
+<body>
+
+    <div id="demo">
+        <h2>Let AJAX change this text</h2>
+    </div>
+
+    <div class="tag" id="DB10.DBW10">a</div>
+    <div class="tag" id="DB10.DBW12">b</div>
+    <div class="tag" id="DB10.DBW14">c</div>
+
+    <script>
+        async function loadNames() {
+            //ItemNames aus DOm lesen
+            var x = document.getElementsByClassName("tag");
+            const data = [];
+
+            for (let i = 0; i < x.length; i++) {
+                data.push(x[i].id);
+            }
+
+            //Leseanfrage senden
+            const response = await fetch('/api', {
+                method: 'POST',
+                body: JSON.stringify(data)
+            });
+            const responseText = await response.text()
+
+            //Ergebnis verarbeiten
+            const myArr = JSON.parse(responseText);
+
+            for (let i = 0; i < myArr.length; i++) {
+                const obj = myArr[i];
+
+                document.getElementById(obj.Name).innerHTML = obj.Value;
+            }
+
+            //document.getElementById("demo").innerHTML = responseText;
+        }
+    </script>
+
+    <input type="button" value="Load Names" onclick="loadNames()" />
+</body>
+
+</html>
