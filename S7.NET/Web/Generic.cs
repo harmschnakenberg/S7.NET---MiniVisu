@@ -32,6 +32,16 @@ namespace S7.NET.web
             return sb.ToString();
         }
 
+        public static string Page(string fileName)
+        {
+            string path = Path.Combine(appPath, "Templates", fileName);
+
+            if (!File.Exists(path))
+                return "<p>Datei nicht gefunden: <i>" + path + "</i><p>";
+
+            return System.IO.File.ReadAllText(path);
+        }
+
         /// <summary>
         /// POST-Inhalte lesen
         /// </summary>

@@ -86,7 +86,8 @@ namespace S7.NET
             List<DataItem> dataItems = new List<DataItem>();
 
             foreach (var itemName in itemNames)
-                dataItems.Add(DataItem.FromAddress(itemName));
+                if (itemName.Length > 0)
+                    dataItems.Add(DataItem.FromAddress(itemName));
 
             return dataItems;
         }
@@ -157,7 +158,7 @@ namespace S7.NET
                         break;
                 }
 
-                if (itemName.Length > 0)
+                if (itemName.Length > 0 && item.Value.ToString().Length > 0)
                     readTags.Add(new Tag() { Name = itemName, Value = item.Value } );
             }
 

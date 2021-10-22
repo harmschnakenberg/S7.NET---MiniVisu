@@ -55,21 +55,21 @@ namespace S7.NET
         }
 
 
-        private static void TimeoutRead(int milSec)
-        {
-            System.Timers.Timer timer = new System.Timers.Timer
-            {
-                Interval = milSec,
-                AutoReset = false
-            };
-            timer.Elapsed += Timer_Elapsed;
-            timer.Start();
-        }
+        //private static void TimeoutRead(int milSec)
+        //{
+        //    System.Timers.Timer timer = new System.Timers.Timer
+        //    {
+        //        Interval = milSec,
+        //        AutoReset = false
+        //    };
+        //    timer.Elapsed += Timer_Elapsed;
+        //    timer.Start();
+        //}
 
-        private static void Timer_Elapsed(object sender, ElapsedEventArgs e)
-        {
-            CancelSource.Cancel(); //Dauerhafte Abfrage beend
-        }
+        //private static void Timer_Elapsed(object sender, ElapsedEventArgs e)
+        //{
+        //    CancelSource.Cancel(); //Dauerhafte Abfrage beend
+        //}
     }
 
 
