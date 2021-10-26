@@ -1,0 +1,150 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>test 1</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <script src="/script/read.js"></script>
+    <script>
+        function w3_open() {
+            document.getElementById("mySidebar").style.display = "block";
+        }
+
+        function w3_close() {
+            document.getElementById("mySidebar").style.display = "none";
+        }
+    </script>
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="w3-sidebar w3-bar-block w3-border-right" style="display:none" id="mySidebar">
+        <button onclick="w3_close()" class="w3-bar-item w3-large">Schlie&szlig;en &times;</button>
+        <a href="#" class="w3-bar-item w3-button">Verbraucher</a>
+        <a href="#" class="w3-bar-item w3-button">K&auml;ltezentrale</a>
+        <a href="#" class="w3-bar-item w3-button">Schaltschr&auml;nke</a>
+        <a href="#" class="w3-bar-item w3-button">Sollwerte</a>
+    </div>
+
+    <!-- Page Content -->
+    <div class="w3-gray">
+        <!--<button class="w3-button w3-teal w3-xlarge" onclick="w3_open()">☰</button>-->
+        <!-- Menu -->
+        <div class="w3-bar w3-black w3-border-bottom">
+            <div class="w3-button w3-left w3-blue w3-border-right w3-padding w3-center" style="width:15%" onclick="w3_open()"><b>Kreutzträger</b></div>
+
+            <a href="#" class="w3-bar-item w3-button w3-gray w3-border-right material-icons">vpn_key</a>
+            <a href="#" class="w3-bar-item w3-button w3-gray w3-border-right material-icons">settings_remote</a>
+            <a href="#" class="w3-bar-item w3-button w3-gray w3-border-right material-icons">sms</a>
+            <a href="#" class="w3-bar-item w3-button w3-gray w3-border-right material-icons">settings_input_component</a>
+            <a href="#" class="w3-bar-item w3-button w3-gray w3-border-right material-icons">cast</a>
+
+            <div class="w3-quarter w3-padding w3-right" style="width:15%">
+                <span class="IW" id="DB10.DBW10">HH</span>:
+                <span class="IW" id="DB10.DBW12">mm</span>:
+                <span class="IW" id="DB10.DBW14">ss</span>
+                <span class="IW w3-right" id="DB10.DBW8">TTT</span>
+            </div>
+
+            <a href="#" class="w3-bar-item w3-button w3-gray w3-right w3-border-right material-icons">power_settings_new</a>
+            <a href="#" class="w3-bar-item w3-button w3-gray w3-right w3-border-right material-icons">menu</a>
+            <a href="#" class="w3-bar-item w3-button w3-gray w3-right w3-border-right material-icons">keyboard</a>
+            <a href="#" class="w3-bar-item w3-button w3-gray w3-right w3-border-right material-icons">engineering</a>
+            <a href="#" class="w3-bar-item w3-button w3-gray w3-right w3-border-right material-icons">notifications</a>
+            <div class="w3-rest w3-padding w3-center w3-border-right">Bildtitel</div>
+
+        </div>
+
+        <div class="w3-container">
+            <h1>Sollwerte</h1>
+<!-- Zeile 1 -->
+            <div class="w3-row-padding w3-border-bottom">
+                <div class="w3-col m4 w3-row-padding">
+                    Raumtemperatur
+                </div>
+                <div class="w3-col m1 w3-black w3-row-padding">
+                    <input class="IW w3-right-align w3-input w3-threequarter w3-border-0 w3-black" id="DB10.DBW26" disabled>
+                    °C
+                </div>
+                <div class="w3-col m1 w3-white w3-row-padding w3-right-align">
+                    <input type="number" step="0.1" class="SW w3-right-align w3-input w3-threequarter w3-border-0 " id="DB10.DBW28">
+                    °C
+                </div>
+
+                <div class="w3-col m4 w3-row-padding">
+                    Abtautemperatur
+                </div>
+                <div class="w3-col m1 w3-black w3-row-padding">
+                    <input class="IW w3-right-align w3-input w3-threequarter w3-border-0 w3-black" id="DB10.DBW16" disabled>
+                    °C
+                </div>
+                <div class="w3-col m1 w3-white w3-row-padding w3-right-align">
+                    <input type="number" step="0.1" class="SW w3-right-align w3-input w3-threequarter w3-border-0 " id="DB10.DBW18">
+                    °C
+                </div>
+            </div>
+
+<!-- Zeile 2 -->
+            <div class="w3-row-padding w3-border-bottom">
+                <div class="w3-col m4 w3-row-padding">
+                    Hysterese
+                </div>
+                <div class="w3-col m1 w3-black w3-row-padding">
+                    <input class="IW w3-right-align w3-input w3-threequarter w3-border-0 w3-black" id="DB10.DBW20" disabled>
+                    K
+                </div>
+                <div class="w3-col m1 w3-white w3-row-padding">
+                    <input type="number" step="0.1" class="SW w3-right-align w3-input w3-threequarter w3-border-0 " id="DB10.DBW22">
+                    K
+                </div>
+
+                <div class="w3-col m4 w3-row-padding">
+                    Handlungsdruck
+                </div>
+                <div class="w3-col m1 w3-black w3-row-padding">
+                    <input class="IW w3-right-align w3-input w3-threequarter w3-border-0 w3-black" id="DB10.DBW24" disabled>
+                    bar
+                </div>
+                <div class="w3-col m1 w3-white w3-row-padding">
+                    <input type="number" step="0.1" class="SW w3-right-align w3-input w3-twothird w3-border-0 " id="DB10.DBW26">
+                    ppm
+                </div>
+            </div>
+		
+<!-- Zeile 3 -->
+            <div class="w3-row-padding w3-border-bottom">
+                <div class="w3-col m4 w3-row-padding">
+                    Freigabe
+                </div>
+                <div class="w3-col m1 w3-black w3-row-padding">
+                    <input type="checkbox" class="IW w3-right-align w3-check w3-threequarter w3-border-0 w3-black" id="DB10.DBX28" disabled>
+                    K
+                </div>
+                <div class="w3-col m1 w3-white w3-row-padding">
+                    <input type="checkbox" step="0.1" class="SW w3-right-align w3-check w3-threequarter w3-border-0 " id="DB10.DBW30">
+                    K
+                </div>
+
+                <div class="w3-col m4 w3-row-padding">
+                    Handlungsdruck
+                </div>
+                <div class="w3-col m1 w3-black w3-row-padding">
+                    <input class="IW w3-right-align w3-input w3-threequarter w3-border-0 w3-black" id="DB10.DBW32" disabled>
+                    bar
+                </div>
+                <div class="w3-col m1 w3-white w3-row-padding">
+                    <input type="number" step="0.1" class="SW w3-right-align w3-input w3-twothird w3-border-0 " id="DB10.DBW34">
+                    ppm
+                </div>
+            </div>		
+			
+        </div>
+
+		<div class="w3-bar w3-grey">&nbsp;</div>
+
+	</div>
+
+</body>
+</html>

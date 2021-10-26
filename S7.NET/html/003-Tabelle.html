@@ -1,0 +1,73 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Einfache Tabelle</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <script src="/script/read.js"></script>
+</head>
+<body class="w3-grey" onload="getRandOben('Test4');">
+    <div id="RandOben"></div>
+
+    <div class="w3-container">
+        <h2>Einfache Tabelle</h2>
+        <p>
+            Noch ein Test.
+        </p>
+
+        <table class="w3-table">
+            <tr>
+                <th>Sollwert</th>
+                <th>Ist</th>
+                <th>Soll</th>
+                <th>Sollwert</th>
+                <th>Ist</th>
+                <th>Soll</th>
+            </tr>
+            <tr>
+                <td style="width:20%;">Raumtemperatur</td>
+                <td style="width:15%;">
+                    <input class="IW w3-right-align w3-threequarter w3-border-0 w3-black" id="DB10.DBW14" disabled>
+                    °C
+                </td>
+                <td style="width:15%;">
+                    <input type="number" step="0.1" class="SW w3-right-align w3-threequarter w3-border-0 " id="DB10.DBW12">
+                    °C
+                </td>
+                <td style="width:20%;">Abtautemperatur</td>
+                <td style="width:15%;">
+                    <input class="IW w3-right-align w3-threequarter w3-border-0 w3-black" id="DB10.DBW20" disabled>
+                    °C
+                </td>
+                <td style="width:15%;">
+                    <input type="number" step="0.1" class="SW w3-right-align w3-threequarter w3-border-0 " id="DB10.DBW22">
+                    °C
+                </td>
+            </tr>
+            <tr>
+                <td style="width:20%;">Hysterese</td>
+                <td style="width:15%;">
+                    <input class="IW w3-right-align w3-threequarter w3-border-0 w3-black" id="DB10.DBW16" disabled>
+                    °C
+                </td>
+                <td style="width:15%;">
+                    <input type="number" step="0.1" class="SW w3-right-align w3-threequarter w3-border-0 " id="DB10.DBW18">
+                    °C
+                </td>
+            </tr>
+            <tr>
+                <td>Adam</td>
+                <td>Johnson</td>
+                <td>67</td>
+            </tr>
+            <tr>
+                <td>Bo</td>
+                <td>Nilson</td>
+                <td>35</td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

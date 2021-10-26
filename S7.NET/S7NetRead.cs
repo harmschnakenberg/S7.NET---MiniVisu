@@ -3,10 +3,9 @@ using S7.Net;
 using S7.Net.Types;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+
 
 namespace S7.NET
 {
@@ -53,32 +52,43 @@ namespace S7.NET
 
 
         public static async Task<string> PlcReadOnceAsync(Plc plc, List<DataItem> tags)
-        {
-            plc.Open();
-
-            if (!plc.IsConnected) return string.Empty;
-
-            List<DataItem> outTags = new List<DataItem>();
-
-            int index = 0;
-            int end = tags.Count;
-            while (index < end) //Es können max. 20 Tags in einer Abfrage sein
+        {           
+            try
             {
-                #region max. 20 Tags in einer Abfrage
-                int count = Math.Min(end - index, 20);
-                List<DataItem> range = tags.GetRange(index, count);
-                index += count;
-                #endregion
+                if (!plc.IsConnected)
+                {
+                    plc.Close();
+                    plc.Open();
+                }
 
-                _ = await plc.ReadMultipleVarsAsync(range);
+                if (!plc.IsConnected) return string.Empty;
 
-                outTags.AddRange(range);
+                List<DataItem> outTags = new List<DataItem>();
 
+                int index = 0;
+                int end = tags.Count;
+                while (index < end) //Es können im S7-Protokoll max. 20 Tags in einer Abfrage sein
+                {
+                    #region max. 20 Tags in einer Abfrage
+                    int count = Math.Min(end - index, 19);
+                    List<DataItem> range = tags.GetRange(index, count);
+                    index += count;
+                    #endregion
+
+                    _ = await plc.ReadMultipleVarsAsync(range);
+
+                    outTags.AddRange(range);
+                }
+
+                // plc.Close();
+
+                return Tags2Json(outTags);
             }
-
-            plc.Close();
-
-            return Tags2Json(outTags);
+            catch (Exception ex)
+            {
+                plc.Close();
+                throw new Exception("PlcReadOnceAsync() " + ex.Message);
+            }
         }
 
         public static List<DataItem> ItemNames2DataItems(List<string> itemNames)
@@ -141,14 +151,14 @@ namespace S7.NET
 
                 switch (item.DataType)
                 {
+                    case DataType.DataBlock:
+                        itemName = $"DB{item.DB}.{offset}";
+                        break;
                     case DataType.Input:
                         break;
                     case DataType.Output:
                         break;
                     case DataType.Memory:
-                        break;
-                    case DataType.DataBlock:
-                        itemName = $"DB{item.DB}.{offset}";
                         break;
                     case DataType.Timer:
                         break;
@@ -158,7 +168,7 @@ namespace S7.NET
                         break;
                 }
 
-                if (itemName.Length > 0 && item.Value.ToString().Length > 0)
+                if (itemName.Length > 0) // && item.Value.ToString().Length > 0)
                     readTags.Add(new Tag() { Name = itemName, Value = item.Value } );
             }
 
