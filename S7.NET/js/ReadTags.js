@@ -1,5 +1,6 @@
 ﻿let TagsIW = [];
 let TagsSW = [];
+
 readIW();
 readSW();
 
@@ -38,37 +39,59 @@ function parseTagNames(className) { //ItemNames aus DOM lesen
 
 
 async function readTagValues(TagNameArr) {
-    //Leseanfrage senden
-    const response = await fetch('/api', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json;charset=utf-8'
-        },
-        body: JSON.stringify(TagNameArr)
-    });
+    try {
+        //Leseanfrage senden
+        const response = await fetch('/api', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+            body: JSON.stringify(TagNameArr)
+        });
 
-    if (!response.ok) return;
-    let tagArr = await response.json();
-  
-    //verarbeite Array von JS-Objekten
-    for (let i = 0; i < tagArr.length; i++) {
-        const tag = tagArr[i];
-        var obj = document.getElementById(tag.Name);
+        if (!response.ok) return;
+        let tagArr = await response.json();
 
-        if (obj.tagName == 'INPUT') {
-            obj.value = tag.Value;
+        //verarbeite Array von JS-Objekten
+        for (let i = 0; i < tagArr.length; i++) {
+            const tag = tagArr[i];
+            var obj = document.getElementById(tag.Name);
+
+            if (obj.tagName == 'INPUT') {
+                obj.value = tag.Value;
+            }
+            else if (tag.Value === true || tag.Value === false) {
+                if (tag.Value == true) {
+                    obj.classList.add('true');
+                    obj.classList.remove('false');
+                } else {
+                    obj.classList.add('false');
+                    obj.classList.remove('true');
+                }
+            }
+            else if (tag.Value != null) {
+                obj.innerHTML = tag.Value;
+            }
         }
-        else {
-            obj.innerHTML = tag.Value;
-        }
+
+        //nur Debug
+        document.getElementById("demo").innerHTML = tagArr[tagArr.length - 1].Value;
     }
-
-    //nur Debug
-   // document.getElementById("demo").innerHTML = tagArr[0].Value;
+    catch (err) {
+        document.getElementById("demo").innerHTML = err.message;
+    }
 }
 
 async function getRandOben(pageTitle) {
     fetch('/status/'+ pageTitle)
         .then(x => x.text())
         .then(y => document.getElementById('RandOben').innerHTML = y);
+}
+
+function w3_open() {
+    document.getElementById("Sidebar").style.display = "block";
+}
+
+function w3_close() {
+    document.getElementById("Sidebar").style.display = "none";
 }

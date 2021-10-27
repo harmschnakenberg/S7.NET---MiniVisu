@@ -8,9 +8,9 @@ namespace S7.NET.web
 {
     class Html
     {
-        private static readonly string appPath = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+        internal static readonly string appPath = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
 
-        private static readonly Dictionary<int, FileInfo> HtmlPagePaths = new Dictionary<int, FileInfo>();
+        private static readonly Dictionary<int, FileInfo> HtmlPagePathDict = new Dictionary<int, FileInfo>();
 
         /// <summary>
         /// Dateien der Form '000-BeschreibenderName.html'
@@ -18,7 +18,7 @@ namespace S7.NET.web
         /// </summary>
         /// <param name="folder">Ordnername</param>
         /// <param name="fileExtention">Dateiendung</param>
-        private static void GetHtmlPagePaths(string folder, string fileExtention = "*.html")
+        private static void GetHtmlPagePathDict(string folder, string fileExtention = "*.html")
         {
             DirectoryInfo d = new DirectoryInfo(Path.Combine(appPath, folder));
 
@@ -27,10 +27,9 @@ namespace S7.NET.web
                 string[] n = file.Name.Split('-');
 
                 if (n.Length > 1 && n[0].Length == 3 && int.TryParse(n[0], out int id))                
-                    HtmlPagePaths.Add(id, file);
+                    HtmlPagePathDict.Add(id, file);
             }
         }
-
 
 
         /// <summary>
@@ -71,15 +70,15 @@ namespace S7.NET.web
         /// <returns></returns>
         public static string Page(string folderName, int id)
         {
-            if (HtmlPagePaths.Count == 0)
-                GetHtmlPagePaths(folderName);
+            if (HtmlPagePathDict.Count == 0)
+                GetHtmlPagePathDict(folderName);
 
-            if (!HtmlPagePaths.ContainsKey(id)) //Wenn es die Datei nicht gibt, zurück ins Haupt-Menü
+            if (!HtmlPagePathDict.ContainsKey(id)) //Wenn es die Datei nicht gibt, zurück ins Haupt-Menü
                 id = 0;
 
-            if (HtmlPagePaths.ContainsKey(id))
+            if (HtmlPagePathDict.ContainsKey(id))
             {
-                string path = HtmlPagePaths[id].FullName;
+                string path = HtmlPagePathDict[id].FullName;
 
                 if (File.Exists(path))
                     return System.IO.File.ReadAllText(path);
@@ -124,6 +123,19 @@ namespace S7.NET.web
             string[] pairs = reader.ReadToEnd().Replace("\"", "").TrimStart('[').TrimEnd(']').Split(',');
 
             return pairs;
+        }
+
+
+        public static string GetHtmlAlarmList(List<AlarmTag> alarmTags)
+        {
+            StringBuilder html = new StringBuilder("<ul class='w3-ul'>");
+
+            foreach (AlarmTag tag in alarmTags)            
+                html.AppendLine($"<li class='SW' id='{tag.Name}'>{tag.Comment}<span class='w3-right'>{tag.Prio}</span></li>");
+            
+            html.AppendLine("</ul>");
+
+            return html.ToString();
         }
 
     }

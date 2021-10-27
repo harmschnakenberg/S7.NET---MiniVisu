@@ -19,13 +19,19 @@
     </script>
 </head>
 <body>
+
+    <!-- RandOben -->
+    <div id="RandOben"></div>
+
     <!-- Sidebar -->
-    <div class="w3-sidebar w3-bar-block w3-border-right" style="display:none" id="mySidebar">
-        <button onclick="w3_close()" class="w3-bar-item w3-large">Schlie&szlig;en &times;</button>
-        <a href="#" class="w3-bar-item w3-button">Verbraucher</a>
-        <a href="#" class="w3-bar-item w3-button">K&auml;ltezentrale</a>
-        <a href="#" class="w3-bar-item w3-button">Schaltschr&auml;nke</a>
-        <a href="#" class="w3-bar-item w3-button">Sollwerte</a>
+    <div class="w3-sidebar w3-bar-block 3-card w3-gray w3-border-right w3-large w3-animate-left" style="width:15%;display:none" id="Sidebar">
+        <button onclick="w3_close()" class="w3-bar-item w3-large w3-button w3-right-align">&times;</button>
+        <a href="/1" class="w3-bar-item w3-button w3-border-bottom">Verbraucher</a>
+        <a href="/2" class="w3-bar-item w3-button w3-border-bottom">K&auml;ltezentrale</a>
+        <a href="/3" class="w3-bar-item w3-button w3-border-bottom">Schaltschr&auml;nke</a>
+        <a href="/4" class="w3-bar-item w3-button w3-border-bottom">Sollwerte</a>
+        <a href="/5" class="w3-bar-item w3-button w3-border-bottom">Statistik</a>
+        <a href="/alarm" class="w3-bar-item w3-button w3-border-bottom">Alarme</a>
     </div>
 
     <!-- Page Content -->
@@ -59,7 +65,7 @@
 
         <div class="w3-container">
             <h1>Sollwerte</h1>
-<!-- Zeile 1 -->
+            <!-- Zeile 1 -->
             <div class="w3-row-padding w3-border-bottom">
                 <div class="w3-col m4 w3-row-padding">
                     Raumtemperatur
@@ -86,7 +92,7 @@
                 </div>
             </div>
 
-<!-- Zeile 2 -->
+            <!-- Zeile 2 -->
             <div class="w3-row-padding w3-border-bottom">
                 <div class="w3-col m4 w3-row-padding">
                     Hysterese
@@ -112,8 +118,8 @@
                     ppm
                 </div>
             </div>
-		
-<!-- Zeile 3 -->
+
+            <!-- Zeile 3 -->
             <div class="w3-row-padding w3-border-bottom">
                 <div class="w3-col m4 w3-row-padding">
                     Freigabe
@@ -138,13 +144,13 @@
                     <input type="number" step="0.1" class="SW w3-right-align w3-input w3-twothird w3-border-0 " id="DB10.DBW34">
                     ppm
                 </div>
-            </div>		
-			
+            </div>
+
         </div>
 
-		<div class="w3-bar w3-grey">&nbsp;</div>
+        <div class="w3-bar w3-grey">&nbsp;</div>
 
-	</div>
+    </div>
 
 </body>
 </html>

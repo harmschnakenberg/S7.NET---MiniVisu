@@ -62,6 +62,16 @@ namespace S7.NET.web
             await context.Response.SendResponseAsync(html).ConfigureAwait(false);
         }
 
+        [RestRoute("Get", "/alarm")] //Ruft eine dynamsch erstellte Alarm-Liste auf
+        public static async Task GetAlertPage(IHttpContext context)
+        {
+            string htmlAlarmList = Html.GetHtmlAlarmList(Alarm.AlarmTags);
+            Dictionary<string, string> pairs = new Dictionary<string, string>() { { "#ALARMLIST#", htmlAlarmList } };
+            string html = Html.Page("html", "Alarm.html", pairs);
+
+            await context.Response.SendResponseAsync(html).ConfigureAwait(false);
+        }
+
         [RestRoute] //Home-Seite
         public static async Task Home(IHttpContext context)
         {

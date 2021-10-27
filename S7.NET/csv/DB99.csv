@@ -1,0 +1,42 @@
+﻿DB99.DBX0.0;Not-Aus Schaltgerät;1
+DB99.DBX0.1;Not-Aus Schalter Schaltschrank Türe;1
+DB99.DBX0.2;Not-Aus Schalter Maschinenraum 900.35;1
+DB99.DBX0.3;Not-Aus Schalter Maschinenraum am Zugang innen 900.36;1
+DB99.DBX0.4;Not-Aus Schalter Maschinenraum am Zugang außen 900.37;1
+DB99.DBX0.5;Not-Aus Schalter Reserve;1
+DB99.DBX0.6;Not-Aus Schalter Reserve;1
+DB99.DBX0.7;Not-Aus Reset;1
+DB99.DBX1.0;;0
+DB99.DBX1.1;;0
+DB99.DBX1.2;;0
+DB99.DBX1.3;;0
+DB99.DBX1.4;;0
+DB99.DBX1.5;;0
+DB99.DBX1.6;;0
+DB99.DBX1.7;;0
+DB99.DBX2.0;Brandmeldeanalge Alarm;1
+DB99.DBX2.1;;0
+DB99.DBX2.2;;0
+DB99.DBX2.3;;0
+DB99.DBX2.4;;0
+DB99.DBX2.5;;0
+DB99.DBX2.6;;0
+DB99.DBX2.7;;0
+DB99.DBX3.0;Schaltschrank EV1 Meldung Hauptschalter;1
+DB99.DBX3.1;Schaltschrank EV1 Überspannungs- schutz Einspeisung;2
+DB99.DBX3.2;Schaltschrank EV1 Feld SF1 Automatenfall Allgemein;1
+DB99.DBX3.3;Schaltschrank EV1 Feld SF2 Automatenfall Allgemein;1
+DB99.DBX3.4;Schaltschrank EV1 Feld SF2 Steuerspannung 230V AC ok;1
+DB99.DBX3.5;Schaltschrank EV1 Feld SF2 Steuerspannung 24V DC ok;1
+DB99.DBX3.6;;0
+DB99.DBX3.7;Schaltschrank EV1 Feld SF2 Übertemperatur;1
+DB99.DBX4.0;Schaltschrank EV1 Feld SF3 Automatenfall Allgemein;1
+DB99.DBX4.1;Schaltschrank EV1 Feld SF3 Steuerspannung 230V AC ok;1
+DB99.DBX4.2;Schaltschrank EV1 Feld SF3 Steuerspannung 24V DC ok;1
+DB99.DBX4.3;;0
+DB99.DBX4.4;;0
+DB99.DBX4.5;;0
+DB99.DBX4.6;;0
+DB99.DBX4.7;;0
+DB99.DBX5.0;Masterschrank Lastabgang Steckdose PC Arbeitsplatz Automatenfall;1
+DB99.DBX5.1;Masterschrank Meldung Hauptschalter;2

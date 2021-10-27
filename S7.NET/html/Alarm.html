@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Alarmliste</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <script src="/script/read.js"></script>
+</head>
+<body class="w3-grey" onload="getRandOben('Aktuelle Alarme');">
+
+    <!-- RandOben -->
+    <div id="RandOben"></div>
+
+    <!-- Sidebar -->
+    <div class="w3-sidebar w3-bar-block 3-card w3-gray w3-border-right w3-large w3-animate-left" style="width:15%;display:none" id="Sidebar">
+        <button onclick="w3_close()" class="w3-bar-item w3-large w3-button w3-right-align">&times;</button>
+        <a href="/1" class="w3-bar-item w3-button w3-border-bottom">Verbraucher</a>
+        <a href="/2" class="w3-bar-item w3-button w3-border-bottom">K&auml;ltezentrale</a>
+        <a href="/3" class="w3-bar-item w3-button w3-border-bottom">Schaltschr&auml;nke</a>
+        <a href="/4" class="w3-bar-item w3-button w3-border-bottom">Sollwerte</a>
+        <a href="/5" class="w3-bar-item w3-button w3-border-bottom">Statistik</a>
+        <a href="/alarm" class="w3-bar-item w3-button w3-border-bottom">Alarme</a>
+    </div>
+
+    <!-- Inhalt -->
+    <div class="w3-container">
+        <h2>Aktuelle Alarme</h2>
+        #ALARMLIST#
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Alarmliste</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <script src="/script/read.js"></script>
+</head>
+<body class="w3-grey" onload="getRandOben('Test4');">
+
+    <!-- RandOben -->
+    <div id="RandOben"></div>
+
+    <!-- Sidebar -->
+    <div class="w3-sidebar w3-bar-block 3-card w3-gray w3-border-right w3-large w3-animate-left" style="width:15%;display:none" id="Sidebar">
+        <button onclick="w3_close()" class="w3-bar-item w3-large w3-button w3-right-align">&times;</button>
+        <a href="/1" class="w3-bar-item w3-button w3-border-bottom">Verbraucher</a>
+        <a href="/2" class="w3-bar-item w3-button w3-border-bottom">K&auml;ltezentrale</a>
+        <a href="/3" class="w3-bar-item w3-button w3-border-bottom">Schaltschr&auml;nke</a>
+        <a href="/4" class="w3-bar-item w3-button w3-border-bottom">Sollwerte</a>
+        <a href="/5" class="w3-bar-item w3-button w3-border-bottom">Statistik</a>
+        <a href="/alarm" class="w3-bar-item w3-button w3-border-bottom">Alarme</a>
+    </div>
+
+
+    <!-- Inhalt -->
+    <div class="w3-container">
+        <h2>Entwurf Alarmliste</h2>
+        <ul class="w3-ul">
+            <li class="IW" id="DB99.DBX2.0">Störung Gurke</li>
+            <li class="IW" id="DB99.DBX2.1">Störung Banane</li>
+            <li class="IW" id="DB99.DBX2.2">Störung Kürbis</li>
+            <li class="IW" id="DB99.DBX2.3">Störung Apfel</li>
+            <li class="IW" id="DB99.DBX2.4">Störung Karotte</li>
+            <li class="IW" id="DB99.DBX2.5">Störung Birne</li>
+            <li class="IW" id="DB99.DBX2.6">Störung Porree</li>
+            <li class="IW" id="DB99.DBX2.7">Störung Pfirsich</li>
+        </ul>
+    </div>
+
+    <div id="demo" class="w3-display-bottomright">
+        <h2 class="w3-right-align">Let AJAX change this text</h2>
+    </div>
+
+</body>
+</html>

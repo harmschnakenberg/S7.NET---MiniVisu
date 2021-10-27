@@ -80,7 +80,7 @@ namespace S7.NET
                     outTags.AddRange(range);
                 }
 
-                // plc.Close();
+                // plc.Close(); //böse! Bricht nach ca. 1 min mit NullReferenceException ab.
 
                 return Tags2Json(outTags);
             }
@@ -108,7 +108,7 @@ namespace S7.NET
 
             foreach (var item in dataItems)
             {
-                string itemName = string.Empty;
+                string itemName;
                 string offset = string.Empty;
 
                 switch (item.VarType)
@@ -155,16 +155,22 @@ namespace S7.NET
                         itemName = $"DB{item.DB}.{offset}";
                         break;
                     case DataType.Input:
+                        itemName = "Eingang";
                         break;
                     case DataType.Output:
+                        itemName = "Ausgang";
                         break;
                     case DataType.Memory:
+                        itemName = "Merker";
                         break;
                     case DataType.Timer:
+                        itemName = "Timer";
                         break;
                     case DataType.Counter:
+                        itemName = "Counter";
                         break;
                     default:
+                        itemName = "Unbekannt";
                         break;
                 }
 
@@ -182,6 +188,8 @@ namespace S7.NET
 
 public class Tag
 {
+    #region Basic Properties
     public string Name { get; set; }
     public object Value { get; set; }
+    #endregion
 }

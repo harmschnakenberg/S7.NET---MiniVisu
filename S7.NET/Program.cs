@@ -17,6 +17,8 @@ namespace S7.NET
         static void Main()
         {
             Server.Start();
+            //G:\VisualStudio\Projekte\S7.NET\S7.NET\S7.NET\csv\DB99.csv
+            Alarm.LoadAlarmDb(System.IO.Path.Combine(S7.NET.web.Html.appPath,"csv", "DB99.csv"));
 
             #region Testfeld 'Dauerhaft lesen'
             //#region Dummy Datenerzeugung
@@ -28,7 +30,7 @@ namespace S7.NET
             //};
 
             //string json = JsonConvert.SerializeObject(writeTags);
-            
+
             //Console.WriteLine("Anfrage-String:");
             //Console.WriteLine(json);
 
@@ -41,7 +43,7 @@ namespace S7.NET
             //    PlcRead(Plc1, dataItems, CancelSource.Token, 0); //Dauerlesen
 
             //    TimeoutRead(60000);
-               
+
             //}
             //catch (PlcException plc_ex)
             //{
