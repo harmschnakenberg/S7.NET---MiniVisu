@@ -9,54 +9,133 @@
     <!--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>-->
     <script src="/script/read.js"></script>
 </head>
-<body class="w3-light-gray" onload="getRandOben('Test 0')">
+<body class="w3-gray" onload="getRandOben('Sollwerte Dummy')">
 
     <div id="RandOben"></div>
+    <!-- Sidebar -->
+    <div class="w3-sidebar w3-bar-block 3-card w3-gray w3-border-right w3-large w3-animate-left" style="width:15%;display:none" id="Sidebar">
+        <button onclick="w3_close()" class="w3-bar-item w3-large w3-button w3-right-align">&times;</button>
+        <a href="/1" class="w3-bar-item w3-button w3-border-bottom">Verbraucher</a>
+        <a href="/2" class="w3-bar-item w3-button w3-border-bottom">K&auml;ltezentrale</a>
+        <a href="/3" class="w3-bar-item w3-button w3-border-bottom">Schaltschr&auml;nke</a>
+        <a href="/4" class="w3-bar-item w3-button w3-border-bottom">Sollwerte</a>
+        <a href="/5" class="w3-bar-item w3-button w3-border-bottom">Statistik</a>
+        <a href="/alarm" class="w3-bar-item w3-button w3-border-bottom">Alarme</a>
+    </div>
 
-    <div class="w3-row">
-
-        <!-- Sidebar -->
-        <div class="w3-sidebar w3-bar-block 3-card w3-gray w3-border-right w3-large w3-animate-left" style="width:15%;display:none" id="Sidebar">
-            <button onclick="w3_close()" class="w3-bar-item w3-large w3-button w3-right-align">&times;</button>
-            <a href="/1" class="w3-bar-item w3-button w3-border-bottom">Verbraucher</a>
-            <a href="/2" class="w3-bar-item w3-button w3-border-bottom">K&auml;ltezentrale</a>
-            <a href="/3" class="w3-bar-item w3-button w3-border-bottom">Schaltschr&auml;nke</a>
-            <a href="/4" class="w3-bar-item w3-button w3-border-bottom">Sollwerte</a>
-            <a href="/5" class="w3-bar-item w3-button w3-border-bottom">Statistik</a>
-            <a href="/alarm" class="w3-bar-item w3-button w3-border-bottom">Alarme</a>
+    <!-- Inhalt -->
+    <div class="w3-row w3-black w3-container w3-margin-bottom w3-padding">
+        <div class="w3-col m3">
+            Sollwert Bezeichnung
+        </div>
+        <div class="w3-col m1 w3-center">
+            Ist
+        </div>
+        <div class="w3-col m1 w3-center">
+            Soll
         </div>
 
+        <div class="w3-col m1">&nbsp;</div>
 
-        <div class="w3-col">
-            <table class="w3-gray w3-table w3-right" style="width:85%">
-                <tr class="w3-black w3-border-top">
-                    <th>Sollwert Bezeichnung</th>
-                    <th class="w3-center">Ist</th>
-                    <th class="w3-center">Soll</th>
-                    <th>Sollwert Bezeichnung</th>
-                    <th class="w3-center">Ist</th>
-                    <th class="w3-center">Soll</th>
-                </tr>
-                <tr class="w3-border-top">
-                    <td>Raumtemperatur</td>
-                    <td><span class="w3-tag"><input type="number" class="IW w3-black w3-right-align w3-border-0" style="width:100px;" id="DB10.DBW10" disabled>°C</span></td>
-                    <td><span class="w3-tag w3-sand"><input type="number" step="0.1" class="SW w3-sand w3-right-align w3-border-0 " style="width:100px;" id="DB10.DBW12">°C</span></td>
-                    <td>Abtauende</td>
-                    <td><span class="w3-tag"><input type="number" class="IW w3-black w3-right-align w3-border-0" style="width:100px;" id="DB10.DBW14" disabled>°C</span></td>
-                    <td><span class="w3-tag w3-sand"><input type="number" step="0.1" class="SW w3-sand w3-right-align w3-border-0 " style="width:100px;" id="DB10.DBW16">°C</span></td>
-                </tr>
-                <tr class="w3-border-top">
-                    <td>Hysterese</td>
-                    <td><span class="w3-tag"><span class="IW w3-black w3-right-align" style="width:100px;" id="DB10.DBW18"></span>°C</span></td>
-                </tr>
-            </table>
+        <div class="w3-col m3">
+            Sollwert Bezeichnung
+        </div>
+        <div class="w3-col m1 w3-center">
+            Ist
+        </div>
+        <div class="w3-col m1 w3-center">
+            Soll
         </div>
     </div>
 
-    <div id="demo" class="w3-display-bottomright">
-        <h2 class="w3-right-align">Let AJAX change this text</h2>
+    <!-- Zeile 1 -->
+    <div class="w3-row w3-container">
+        <div class="w3-col m3">
+            <p>Raumtemperatur</p>
+        </div>
+        <div class="w3-col m1 w3-input w3-black">
+            <input type="number" class="IW w3-black w3-right-align w3-border-0 w3-threequarter" value="999.9" id="DB10.DBW0" disabled>
+            &deg;C
+        </div>
+        <div class="w3-col m1 w3-input w3-white">
+            <input type="number" step="0.1" class="SW w3-white w3-right-align w3-border-0 w3-threequarter" value="999.9" id="DB10.DBW2">
+            &deg;C
+        </div>
+
+        <div class="w3-col m1">&nbsp;</div>
+
+        <div class="w3-col m3">
+            <p>Abtautemperatur</p>
+        </div>
+        <div class="w3-col m1 w3-input w3-black">
+            <input type="number" class="IW w3-black w3-right-align w3-border-0 w3-threequarter" value="999.9" id="DB10.DBW4" disabled>
+            &deg;C
+        </div>
+        <div class="w3-col m1 w3-input w3-white">
+            <input type="number" step="0.1" class="SW w3-white w3-right-align w3-border-0 w3-threequarter" value="999.9" id="DB10.DBW6">
+            &deg;C
+        </div>
     </div>
+
+    <!-- Zeile 2 -->
+    <div class="w3-row w3-container">
+        <div class="w3-col m3">
+            <p>Hysterese</p>
+        </div>
+        <div class="w3-col m1 w3-input w3-black">
+            <input type="number" class="IW w3-black w3-right-align w3-border-0 w3-threequarter" value="999.9" id="DB10.DBW8" disabled>
+            K
+        </div>
+        <div class="w3-col m1 w3-input w3-white">
+            <input type="number" step="0.1" class="SW w3-white w3-right-align w3-border-0 w3-threequarter" value="999.9" id="DB10.DBW18">
+            K
+        </div>
+
+        <div class="w3-col m1">&nbsp;</div>
+
+        <div class="w3-col m3">
+            <p>Handlungsdruck</p>
+        </div>
+        <div class="w3-col m1 w3-input w3-black">
+            <input type="number" class="IW w3-black w3-right-align w3-border-0 w3-threequarter" value="999.9" id="DB10.DBW20" disabled>
+            bar
+        </div>
+        <div class="w3-col m1 w3-input w3-white">
+            <input type="number" step="0.1" class="SW w3-white w3-right-align w3-border-0 w3-threequarter" value="999.9" id="DB10.DBW22">
+            bar
+        </div>
+    </div>
+
+    <!-- Zeile 3 -->
+    <div class="w3-row w3-container">
+        <div class="w3-col m3">
+            <p>Temperaturdifferenz</p>
+        </div>
+        <div class="w3-col m1 w3-input w3-black">
+            <input type="number" class="IW w3-black w3-right-align w3-border-0 w3-threequarter" value="999.9" id="DB10.DBW24" disabled>
+            K
+        </div>
+        <div class="w3-col m1 w3-input w3-white">
+            <input type="number" step="0.1" class="SW w3-white w3-right-align w3-border-0 w3-threequarter" value="999.9" id="DB10.DBW26">
+            K
+        </div>
+
+        <div class="w3-col m1">&nbsp;</div>
+
+        <div class="w3-col m3">
+            <p>NH3-Sensor</p>
+        </div>
+        <div class="w3-col m1 w3-input w3-black">
+            <input type="number" class="IW w3-black w3-right-align w3-border-0 w3-twothird" value="23999" id="DB10.DBW28" disabled>
+            ppm
+        </div>
+        <div class="w3-col m1 w3-input w3-white">
+            <input type="number" step="0.1" class="SW w3-white w3-right-align w3-border-0 w3-twothird" value="12999" id="DB10.DBW32">
+            ppm
+        </div>
+    </div>
+
+
 
 </body>
-
 </html>

@@ -6,6 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <script src="/script/read.js"></script>
+    <script>
+        function filterPrio(prio) {
+            const x = document.querySelectorAll('li.true');
+            for (let i = 0; i < x.length; i++) {
+                if (x[i].classList.contains('Prio' + prio))
+                    x[i].classList.toggle("w3-hide");  
+            }
+        }
+    </script>
 </head>
 <body class="w3-grey" onload="getRandOben('Aktuelle Alarme');">
 
@@ -26,8 +35,13 @@
     <!-- Inhalt -->
     <div class="w3-container">
         <h2>Aktuelle Alarme</h2>
-        #ALARMLIST#
+        <button class="w3-button w3-sand w3-margin w3-right" onclick="filterPrio('2')">Prio 2</button>
+        <button class="w3-button w3-sand w3-margin w3-right" onclick="filterPrio('1')">Prio 1</button>
+        <div class="w3-container">
+            #ALARMLIST#
+        </div>
     </div>
+
 
 </body>
 </html>

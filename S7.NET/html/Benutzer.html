@@ -1,0 +1,87 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>K&auml;lteanlage - Benutzerverwaltung</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <script src="/script/read.js"></script>
+    <script>
+        function getAccount(x) {
+
+            alert(x.childNodes[1].innerHTML);
+            document.getElementById("accountName").value = x.childNodes[1].innerHTML;
+            document.getElementById("accountAccessLevel").value = x.childNodes[2].innerHTML;
+
+
+            var x = document.getElementById("AccountForm1")            
+            if (x.className.indexOf("w3-show") == -1) {
+                x.className += " w3-show";
+            } else {
+                x.className = x.className.replace(" w3-show", "");
+            }
+        }
+    </script>
+
+</head>
+<body class="w3-grey" onload="getRandOben('Benutzerverwaltung');">
+
+    <!-- RandOben -->
+    <div id="RandOben"></div>
+
+    <!-- Sidebar -->
+    <div class="w3-sidebar w3-bar-block 3-card w3-gray w3-border-right w3-large w3-animate-left" style="width:15%;display:none" id="Sidebar">
+        <button onclick="w3_close()" class="w3-bar-item w3-large w3-button w3-right-align">&times;</button>
+        <a href="/1" class="w3-bar-item w3-button w3-border-bottom">Verbraucher</a>
+        <a href="/2" class="w3-bar-item w3-button w3-border-bottom">K&auml;ltezentrale</a>
+        <a href="/3" class="w3-bar-item w3-button w3-border-bottom">Schaltschr&auml;nke</a>
+        <a href="/4" class="w3-bar-item w3-button w3-border-bottom">Sollwerte</a>
+        <a href="/5" class="w3-bar-item w3-button w3-border-bottom">Statistik</a>
+        <a href="/6" class="w3-bar-item w3-button w3-border-bottom">Benutzerverwaltung</a>
+        <a href="/alarm" class="w3-bar-item w3-button w3-border-bottom">Alarme</a>
+    </div>
+
+    <!-- Inhalt -->
+    <div class="w3-quarter">&nbsp;</div>
+
+    <div class="w3-container w3-half">
+        <form id="AccountForm1" class="w3-hide w3-container w3-light-grey" method="post" action="/benutzer/speichern">
+
+            <div class="w3-row w3-section">
+                <div class="w3-col" style="width:50px"><i class="w3-xxlarge material-icons">person</i></div>
+                <div class="w3-rest">
+                    <input class="w3-input w3-border" name="accountName" id="accountName" type="text" placeholder="Benutzername">
+                </div>
+            </div>
+
+            <div class="w3-row w3-section">
+                <div class="w3-col" style="width:50px"><i class="w3-xxlarge material-icons">numbers</i></div>
+                <div class="w3-rest">
+                    <input class="w3-input w3-border" name="accountAccessLevel" id="accountAccessLevel" type="number" placeholder="Zugriffslevel">
+                </div>
+            </div>
+
+            <div class="w3-row w3-section">
+                <div class="w3-col" style="width:50px"><i class="w3-xxlarge material-icons">fingerprint</i></div>
+                <div class="w3-rest">
+                    <input class="w3-input w3-border" name="accountPassword1" type="password" placeholder="Passwort">
+                </div>
+            </div>
+
+            <div class="w3-row w3-section">
+                <div class="w3-col" style="width:50px"><i class="w3-xxlarge material-icons">fingerprint</i></div>
+                <div class="w3-rest">
+                    <input class="w3-input w3-border" name="accountPassword2" type="password" placeholder="Passwort wiederholen">
+                </div>
+            </div>
+
+            #BUTTON#
+        </form>
+
+        <div class="w3-container">
+            #USERSTABLE#
+        </div>
+    </div>
+
+</body>
+</html>

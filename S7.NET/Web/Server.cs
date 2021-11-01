@@ -12,6 +12,14 @@ namespace S7.NET
     {
         private static IRestServer restServer;
 
+        /// <summary>
+        /// GUID - User-Id
+        /// Liste der eingeloggten Benutzer
+        /// </summary>
+        internal static Dictionary<string, User> LogedInHash = new Dictionary<string, User>();
+
+        public static int AccessLevelSystem { get; set; } = 9000;
+
         public static void Start()
         {
             if (restServer != null && restServer.IsListening) return;
@@ -44,6 +52,16 @@ namespace S7.NET
             if (restServer != null)
                 restServer.Stop();
         }
+
+    }
+
+    public class User
+    {
+        public string Name { get; set; }
+
+        public int AccessLevel { get; set; }
+
+        //Hier können später noch Eigenschaften ergänzt werden (Berechtigung)
 
     }
 }

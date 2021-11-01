@@ -1,12 +1,10 @@
 ﻿let TagsIW = [];
 let TagsSW = [];
 
-readIW();
-readSW();
-
 //Wiederhole Tag-Abfrage
 setInterval(readIW, 1117);
 setInterval(readSW, 3331);
+
 
 function readIW() {
     if (TagsIW.length == 0)
@@ -75,22 +73,28 @@ async function readTagValues(TagNameArr) {
         }
 
         //nur Debug
-        document.getElementById("demo").innerHTML = tagArr[tagArr.length - 1].Value;
+        //document.getElementById("demo").innerHTML = tagArr[tagArr.length - 1].Value;
     }
     catch (err) {
-        document.getElementById("demo").innerHTML = err.message;
+        document.getElementById("message").innerHTML = err.message;
     }
 }
 
+
 async function getRandOben(pageTitle) {
-    fetch('/status/'+ pageTitle)
+    fetch('/statusbar/'+ pageTitle)
         .then(x => x.text())
         .then(y => document.getElementById('RandOben').innerHTML = y);
+
+    readIW();
+    readSW();
 }
+
 
 function w3_open() {
     document.getElementById("Sidebar").style.display = "block";
 }
+
 
 function w3_close() {
     document.getElementById("Sidebar").style.display = "none";

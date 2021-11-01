@@ -55,6 +55,7 @@ namespace S7.NET
         {           
             try
             {
+                
                 if (!plc.IsConnected)
                 {
                     plc.Close();

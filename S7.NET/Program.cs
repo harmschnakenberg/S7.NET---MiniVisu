@@ -16,9 +16,16 @@ namespace S7.NET
 
         static void Main()
         {
+            Plc1.OpenAsync();
             Server.Start();
             //G:\VisualStudio\Projekte\S7.NET\S7.NET\S7.NET\csv\DB99.csv
             Alarm.LoadAlarmDb(System.IO.Path.Combine(S7.NET.web.Html.appPath,"csv", "DB99.csv"));
+            bool registered =  S7.NET.web.Html.RegisterUser("Harm", 8000, "7307");
+
+            if (registered)
+                Console.WriteLine("Benutzer 'Harm' wurde registriert.");
+            else
+                Console.WriteLine("Ohne neue Benutzerregistrtrieung.");
 
             #region Testfeld 'Dauerhaft lesen'
             //#region Dummy Datenerzeugung
