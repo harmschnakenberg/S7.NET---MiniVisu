@@ -1,9 +1,108 @@
-﻿let TagsIW = [];
+﻿///*** SEITE LADEN ***///
+
+function parseTagNames(className) { //ItemNames aus DOM lesen
+    var x = document.getElementsByClassName(className);
+    const dataArr = [];
+
+    for (let i = 0; i < x.length; i++) {
+        if (dataArr.indexOf(x[i].id) == -1) //nur einmal
+            dataArr.push(x[i].id);
+    }
+
+    return dataArr;
+}
+
+async function getRandOben(pageTitle) {
+    fetch('/statusbar/' + pageTitle)
+        .then(x => x.text())
+        .then(y => document.getElementById('RandOben').innerHTML = y);
+
+    readIW();
+    readSW();
+    AddEventWriteVal("SW");
+}
+
+///*** ENDE SEITE LADEN ***///
+
+///*** STYLING ***///
+
+function styleIW(className) {
+    var x = document.getElementsByClassName(className);
+
+    for (let i = 0; i < x.length; i++) {
+        var y = x[i];
+
+        const input = document.createElement("input");
+        input.id = y.getAttribute("data-tag");
+
+        input.classList.add('IW');
+        input.classList.add('w3-input');
+        input.classList.add('w3-black');
+        input.classList.add('w3-right-align');
+        input.classList.add('w3-border-0');
+        input.classList.add('w3-threequarter');
+        input.disabled = "true";
+
+        const unit = document.createTextNode(y.getAttribute("data-unit"))
+
+        y.classList.add('center');
+        y.classList.add('w3-black');
+        y.appendChild(input);
+        y.appendChild(unit);
+    }
+
+}
+
+
+function styleSW(className) {
+    var x = document.getElementsByClassName(className);
+
+    for (let i = 0; i < x.length; i++) {
+        var y = x[i];
+
+        const input = document.createElement("input");
+        input.id = y.getAttribute("data-tag");
+
+        input.classList.add('SW');
+        input.classList.add('w3-input');
+        input.classList.add('w3-white');
+        input.classList.add('w3-right-align');
+        input.classList.add('w3-border-0');
+        input.classList.add('w3-threequarter');
+        input.type = "number";
+
+        const unit = document.createTextNode(y.getAttribute("data-unit"))
+
+        y.classList.add('center');
+        y.classList.add('w3-white');
+        y.appendChild(input);
+        y.appendChild(unit);
+    }
+
+}
+
+
+function w3_toggle(id) {
+    var x = document.getElementById(id).style.display;
+
+    if (x == "block")
+        document.getElementById(id).style.display = "none";
+    else
+        document.getElementById(id).style.display = "block";
+}
+
+
+///*** ENDE STYLING ***///
+
+///*** WERTE LESEN ***///
+
+let TagsIW = [];
 let TagsSW = [];
 
 //Wiederhole Tag-Abfrage
 var intervalIW = setInterval(readIW, 1117);
 var intervalSW = setInterval(readSW, 5331);
+
 
 function readIW() {
     if (TagsIW.length == 0)
@@ -19,19 +118,6 @@ function readSW() {
 
     readTagValues(TagsSW);
     //document.getElementById("message").innerHTML = new Date().toISOString();
-}
-
-
-function parseTagNames(className) { //ItemNames aus DOM lesen
-    var x = document.getElementsByClassName(className);
-    const dataArr = [];
-
-    for (let i = 0; i < x.length; i++) {
-        if (dataArr.indexOf(x[i].id) == -1) //nur einmal
-            dataArr.push(x[i].id);
-    }
-
-    return dataArr;
 }
 
 
@@ -78,27 +164,9 @@ async function readTagValues(TagNameArr) {
     }
 }
 
+///*** ENDE WERTE LESEN ***///
 
-async function getRandOben(pageTitle) {
-    fetch('/statusbar/'+ pageTitle)
-        .then(x => x.text())
-        .then(y => document.getElementById('RandOben').innerHTML = y);
-
-    readIW();
-    readSW();
-    AddEventWriteVal("SW");
-}
-
-
-function w3_toggle(id) {
-    var x = document.getElementById(id).style.display;
-
-    if (x == "block")
-        document.getElementById(id).style.display = "none";
-    else
-        document.getElementById(id).style.display = "block";
-}
-
+///*** WERTE SCHREIBEN ***///
 
 function AddEventWriteVal(className) { //funktioniert!
     var x = document.getElementsByClassName(className);
@@ -111,7 +179,7 @@ function AddEventWriteVal(className) { //funktioniert!
 
 
 async function writeSW(obj) { //funktioniert!
-    const writeTag = { Name:obj.id, Value:obj.value };
+    const writeTag = { Name: obj.id, Value: obj.value };
 
     const response = await fetch('/api/write', {
         method: 'POST',
@@ -124,5 +192,38 @@ async function writeSW(obj) { //funktioniert!
     if (!response.ok)
         alert('Fehler beim Schreiben von ' + obj.id);
 }
+
+///*** ENDE WERTE SCHREIBEN ***///
+
+//MAGAZIN
+
+
+//function styleIW(className) {
+//    var x = document.getElementsByClassName(className);
+
+//    for (let i = 0; i < x.length; i++) {
+//        x[i].classList.add('w3-input');
+//        x[i].classList.add('w3-black');
+//        x[i].classList.add('w3-right-align');
+//        x[i].classList.add('w3-border-0');
+//        x[i].classList.add('w3-threequarter');
+
+//        //w3-black w3-right-align w3-border-0 w3-threequarter
+//    }
+//}
+
+//function styleSW(className) {
+//    var x = document.getElementsByClassName(className);
+
+//    for (let i = 0; i < x.length; i++) {
+//        x[i].classList.add('w3-input');
+//        x[i].classList.add('w3-white');
+//        x[i].classList.add('w3-right-align');
+//        x[i].classList.add('w3-border-0');
+//        x[i].classList.add('w3-threequarter');
+
+//        //w3-white w3-right-align w3-border-0 w3-twothird
+//    }
+//}
 
 

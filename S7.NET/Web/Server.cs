@@ -31,7 +31,8 @@ namespace S7.NET
                 foreach (GlobalResponseHeaders item in restServer.GlobalResponseHeaders)
                 {
                     if (item.Name == "Server") //Default Global Header für Server führt zu Warnung in Edge
-                        item.Value = "kreutztraeger";                    
+                        item.Value = "kreutztraeger";
+                        item.Suppress = true;
                 }
 
                 restServer.AfterStarting += (s) =>

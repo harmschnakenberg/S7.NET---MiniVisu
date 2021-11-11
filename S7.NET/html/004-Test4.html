@@ -7,9 +7,68 @@
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <!--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>-->
+
+    <!--<script>
+        function styleIW(className) {
+            var x = document.getElementsByClassName(className);
+
+            for (let i = 0; i < x.length; i++) {
+                var y = x[i];
+
+                const input = document.createElement("input");
+                input.id = y.getAttribute("data-tag");
+
+                input.classList.add('IW');
+                input.classList.add('w3-input');
+                input.classList.add('w3-black');
+                input.classList.add('w3-right-align');
+                input.classList.add('w3-border-0');
+                input.classList.add('w3-threequarter');
+                input.disabled = "true";
+
+                const unit = document.createTextNode(y.getAttribute("data-unit"))
+
+                y.classList.add('center');
+                y.classList.add('w3-black');
+                y.appendChild(input);
+                y.appendChild(unit);
+            }
+
+        }
+
+        function styleSW(className) {
+            var x = document.getElementsByClassName(className);
+
+            for (let i = 0; i < x.length; i++) {
+                var y = x[i];
+
+                const input = document.createElement("input");
+                input.id = y.getAttribute("data-tag");
+
+                input.classList.add('SW');
+                input.classList.add('w3-input');
+                input.classList.add('w3-white');
+                input.classList.add('w3-right-align');
+                input.classList.add('w3-border-0');
+                input.classList.add('w3-threequarter');
+                input.type = "number";
+
+                const unit = document.createTextNode(y.getAttribute("data-unit"))
+
+                y.classList.add('center');
+                y.classList.add('w3-white');
+                y.appendChild(input);
+                y.appendChild(unit);
+            }
+
+        }
+
+    </script>-->
+
+
     <script src="/script/read.js"></script>
 </head>
-<body class="w3-gray" onload="getRandOben('Sollwerte Dummy')">
+<body class="w3-gray" onload="styleIW('IWtest'); styleSW('SWtest'); getRandOben('Sollwerte Dummy');">
 
     <div id="RandOben"></div>
     <!-- Sidebar -->
@@ -51,91 +110,38 @@
     <!-- Zeile 1 -->
     <div class="w3-row w3-container">
         <div class="w3-col m3">
-            <p>Raumtemperatur</p>
+            <p>Zeile 1</p>
         </div>
-        <div class="w3-col m1 w3-input w3-black">
-            <input type="number" class="IW w3-black w3-right-align w3-border-0 w3-threequarter" id="DB10.DBW0" disabled>
-            &deg;C
-        </div>
-        <div class="w3-col m1 w3-input w3-white">
-            <input type="number" step="0.1" class="SW w3-white w3-right-align w3-border-0 w3-threequarter"id="DB10.DBW2">
-            &deg;C
-        </div>
-
-        <div class="w3-col m1">&nbsp;</div>
-
-        <div class="w3-col m3">
-            <p>Abtautemperatur</p>
-        </div>
-        <div class="w3-col m1 w3-input w3-black">
-            <input type="number" class="IW w3-black w3-right-align w3-border-0 w3-threequarter" id="DB10.DBW4" disabled>
-            &deg;C
-        </div>
-        <div class="w3-col m1 w3-input w3-white">
-            <input type="number" step="0.1" class="SW w3-white w3-right-align w3-border-0 w3-threequarter" id="DB10.DBW6">
-            &deg;C
-        </div>
+        <div class="IWtest w3-col m1" data-tag="DB10.DBW20" data-unit="&deg;C"></div>
+        <div class="SWtest w3-col m1" data-tag="DB10.DBW22" data-unit="&deg;C" step="1" min="-20" max="40"></div>
     </div>
 
     <!-- Zeile 2 -->
     <div class="w3-row w3-container">
         <div class="w3-col m3">
-            <p>Hysterese</p>
+            <p>Zeile 2</p>
         </div>
-        <div class="w3-col m1 w3-input w3-black">
-            <input type="number" class="IW w3-black w3-right-align w3-border-0 w3-threequarter" id="DB10.DBW48" disabled>
-            K
-        </div>
-        <div class="w3-col m1 w3-input w3-white">
-            <input type="number" step="0.1" class="SW w3-white w3-right-align w3-border-0 w3-threequarter" id="DB10.DBW18">
-            K
-        </div>
-
-        <div class="w3-col m1">&nbsp;</div>
-
-        <div class="w3-col m3">
-            <p>Handlungsdruck</p>
-        </div>
-        <div class="w3-col m1 w3-input w3-black">
-            <input type="number" class="IW w3-black w3-right-align w3-border-0 w3-threequarter" id="DB10.DBW20" disabled>
-            bar
-        </div>
-        <div class="w3-col m1 w3-input w3-white">
-            <input type="number" step="0.1" class="SW w3-white w3-right-align w3-border-0 w3-threequarter" id="DB10.DBW22">
-            bar
-        </div>
+        <div class="IWtest w3-col m1" data-tag="DB10.DBW24" data-unit="&deg;C"></div>
+        <div class="SWtest w3-col m1" data-tag="DB10.DBW26" data-unit="&deg;C" step="1" min="-20" max="40"></div>
     </div>
 
     <!-- Zeile 3 -->
     <div class="w3-row w3-container">
         <div class="w3-col m3">
-            <p>Temperaturdifferenz</p>
+            <p>Zeile 3</p>
         </div>
-        <div class="w3-col m1 w3-input w3-black">
-            <input type="number" class="IW w3-black w3-right-align w3-border-0 w3-threequarter" id="DB10.DBW24" disabled>
-            K
-        </div>
-        <div class="w3-col m1 w3-input w3-white">
-            <input type="number" step="0.1" class="SW w3-white w3-right-align w3-border-0 w3-threequarter" id="DB10.DBW26">
-            K
-        </div>
-
-        <div class="w3-col m1">&nbsp;</div>
-
-        <div class="w3-col m3">
-            <p>NH3-Sensor</p>
-        </div>
-        <div class="w3-col m1 w3-input w3-black">
-            <input type="number" class="IW w3-black w3-right-align w3-border-0 w3-twothird" id="DB10.DBW28" disabled>
-            ppm
-        </div>
-        <div class="w3-col m1 w3-input w3-white">
-            <input type="number" step="0.1" class="SW w3-white w3-right-align w3-border-0 w3-twothird" id="DB10.DBW32" onchange="writeSW(this)">
-            ppm
-        </div>
+        <div class="IWtest w3-col m1" data-tag="DB10.DBW28" data-unit="&deg;C"></div>
+        <div class="SWtest w3-col m1" data-tag="DB10.DBW32" data-unit="&deg;C" step="1" min="-20" max="40"></div>
     </div>
 
-    
+    <!-- Zeile 4 -->
+    <div class="w3-row w3-container">
+        <div class="w3-col m3">
+            <p>Testotesto</p>
+        </div>
+        <div class="IWtest w3-col m1" data-tag="DB10.DBW44" data-unit="&deg;C"></div>
+        <div class="SWtest w3-col m1" data-tag="DB10.DBW58" data-unit="&deg;C" step="1" min="-20" max="40"></div>
+    </div>
 
 </body>
 </html>
