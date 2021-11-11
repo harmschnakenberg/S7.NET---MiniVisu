@@ -2,9 +2,8 @@
 let TagsSW = [];
 
 //Wiederhole Tag-Abfrage
-setInterval(readIW, 1117);
-setInterval(readSW, 3331);
-
+var intervalIW = setInterval(readIW, 1117);
+var intervalSW = setInterval(readSW, 5331);
 
 function readIW() {
     if (TagsIW.length == 0)
@@ -19,6 +18,7 @@ function readSW() {
         TagsSW = parseTagNames("SW");
 
     readTagValues(TagsSW);
+    //document.getElementById("message").innerHTML = new Date().toISOString();
 }
 
 
@@ -31,7 +31,6 @@ function parseTagNames(className) { //ItemNames aus DOM lesen
             dataArr.push(x[i].id);
     }
 
-   // alert(className + ": " + dataArr.length + "/" + x.length)
     return dataArr;
 }
 
@@ -71,12 +70,11 @@ async function readTagValues(TagNameArr) {
                 obj.innerHTML = tag.Value;
             }
         }
-
-        //nur Debug
-        //document.getElementById("demo").innerHTML = tagArr[tagArr.length - 1].Value;
     }
     catch (err) {
-        document.getElementById("message").innerHTML = err.message;
+        clearInterval(intervalIW);
+        clearInterval(intervalSW);
+        document.getElementById("message").innerHTML = 'Fehler beim Lesen von SPS: ' + err.message;
     }
 }
 
@@ -88,14 +86,43 @@ async function getRandOben(pageTitle) {
 
     readIW();
     readSW();
+    AddEventWriteVal("SW");
 }
 
 
-function w3_open() {
-    document.getElementById("Sidebar").style.display = "block";
+function w3_toggle(id) {
+    var x = document.getElementById(id).style.display;
+
+    if (x == "block")
+        document.getElementById(id).style.display = "none";
+    else
+        document.getElementById(id).style.display = "block";
 }
 
 
-function w3_close() {
-    document.getElementById("Sidebar").style.display = "none";
+function AddEventWriteVal(className) { //funktioniert!
+    var x = document.getElementsByClassName(className);
+    //alert(x.length + ' ' + className + '-Elemente');
+    for (let i = 0; i < x.length; i++) {
+        var y = x[i];
+        y.addEventListener("change", function () { writeSW(this) });
+    }
 }
+
+
+async function writeSW(obj) { //funktioniert!
+    const writeTag = { Name:obj.id, Value:obj.value };
+
+    const response = await fetch('/api/write', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json;charset=utf-8'
+        },
+        body: JSON.stringify(writeTag)
+    });
+
+    if (!response.ok)
+        alert('Fehler beim Schreiben von ' + obj.id);
+}
+
+

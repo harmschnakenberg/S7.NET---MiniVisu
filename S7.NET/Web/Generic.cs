@@ -7,7 +7,7 @@ using System.Text;
 
 namespace S7.NET.web
 {
-    class Html
+    partial class Html
     {
         internal static readonly string appPath = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
 
@@ -16,7 +16,7 @@ namespace S7.NET.web
         /// <summary>
         /// GUID - User-Id
         /// </summary>
-        internal static Dictionary<string, Person> LogedInHash = new Dictionary<string, Person>();
+        internal static Dictionary<string, User> LogedInHash = new Dictionary<string, User>();
 
 
         public static Dictionary<string, string> ReadCookies(IHttpContext context)
@@ -114,7 +114,7 @@ namespace S7.NET.web
         /// </summary>
         /// <param name="context"></param>
         /// <returns>Key-Value-Pair</returns>
-        public static Dictionary<string, string> Payload(IHttpContext context)
+        public static Dictionary<string, string> PayloadForm(IHttpContext context)
         {
             System.IO.Stream body = context.Request.InputStream;
             System.IO.StreamReader reader = new System.IO.StreamReader(body);
@@ -134,7 +134,7 @@ namespace S7.NET.web
             return payload;
         }
 
-        public static string[] GetArrayPayload(IHttpContext context)
+        public static string[] PayloadArray(IHttpContext context)
         {
             System.IO.Stream body = context.Request.InputStream;
             System.IO.StreamReader reader = new System.IO.StreamReader(body);
@@ -142,6 +142,24 @@ namespace S7.NET.web
             string[] pairs = reader.ReadToEnd().Replace("\"", "").TrimStart('[').TrimEnd(']').Split(',');
 
             return pairs;
+        }
+
+        public static Dictionary<string, string> PayloadJson(IHttpContext context)
+        {
+            System.IO.Stream body = context.Request.InputStream;
+            System.IO.StreamReader reader = new System.IO.StreamReader(body);
+            Dictionary<string, string> objs = new Dictionary<string, string>();
+
+            string[] pairs = reader.ReadToEnd().Replace("\"", "").TrimStart('{').TrimEnd('}').Split(',');
+
+            foreach (var pair in pairs)
+            {
+                string[] items = pair.Split(':');
+                if (items.Length > 1)
+                    objs.Add(items[0], items[1]);
+            }
+
+            return objs;
         }
 
 
@@ -157,151 +175,6 @@ namespace S7.NET.web
             return html.ToString();
         }
 
-        internal static string CheckCredentials(string name, string password)
-        {
-            try
-            {
-                #region Benutzer-Passwort-Kombination finden
-                string guid = string.Empty;
-                string encryped_pw = Encrypt(password);
-                int accessLevel = 0;
-
-                string path = Path.Combine(appPath, "csv", "Credentials.csv");
-
-                if (File.Exists(path))
-                {
-                    string[] lines = System.IO.File.ReadAllLines(path);
-
-                    foreach (string line in lines)
-                    {
-                        if (line.StartsWith(name))
-                        {
-                            string[] items = line.Split(';');
-
-                            if (items.Length > 2 && items[2].Trim() == encryped_pw)
-                            {
-                                guid = Guid.NewGuid().ToString("N");
-                                int.TryParse(items[1], out accessLevel);
-                                break;
-                            }
-                        }
-                    }
-                }
-                #endregion
-
-                #region Liste eingeloggter Benutzer aktualisieren
-                if (guid.Length > 0)
-                {
-                    while (Server.LogedInHash.Count > 10) //Max. 10 Benutzer gleichzetig eingelogged
-                    {
-                        Server.LogedInHash.Remove(Server.LogedInHash.Keys.GetEnumerator().Current);
-                    }
-
-                    User user = new User
-                    {
-                        Name = name,
-                        AccessLevel = accessLevel
-                    };
-
-                    Server.LogedInHash.Add(guid, user);
-
-                    return guid;
-                }
-                #endregion
-            }
-            catch (Exception)
-            {
-                throw;
-                // Was tun?
-            }
-
-            return string.Empty;
-        }
-
-        internal static bool RegisterUser(string name, int level, string password)
-        {
-            try
-            {
-                string encryped_pw = Encrypt(password);
-                string path = Path.Combine(appPath, "csv", "Credentials.csv");
-                if (!File.Exists(path)) return false;
-
-                string[] lines = System.IO.File.ReadAllLines(path);
-
-                foreach (string line in lines)
-                {
-                    if (line.StartsWith(name))
-                        return false;
-                }
-
-                File.AppendAllText(path, $"{name};{level};{encryped_pw}" + Environment.NewLine);
-                return true;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-                //return false;
-            }
-        }
-
-        internal static bool IsUserNameUnique(string name)
-        {
-            string path = Path.Combine(appPath, "csv", "Credentials.csv");
-            if (!File.Exists(path)) return false;
-
-            string[] lines = System.IO.File.ReadAllLines(path);
-
-            foreach (string line in lines)
-            {
-                if (line.StartsWith(name))
-                    return false;
-            }
-
-            return true;
-        }
-
-
-        private static string Encrypt(string password)
-        {
-            if (password == null) return password;
-
-            byte[] data = System.Text.Encoding.UTF8.GetBytes(password);
-            data = new System.Security.Cryptography.SHA256Managed().ComputeHash(data);
-            return System.Text.Encoding.UTF8.GetString(data);
-        }
-
-        internal static string GetHtmlUserTable(int userAccessLevel)
-        {
-            try
-            {
-                string path = Path.Combine(appPath, "csv", "Credentials.csv");
-                if (!File.Exists(path)) return "Die Benutzerdatei ist nicht vorhanden.";
-
-                string[] lines = System.IO.File.ReadAllLines(path);
-                StringBuilder sb = new StringBuilder();
-                sb.AppendLine("<table class='w3-table-all w3-light-grey'>");
-
-                foreach (string line in lines)
-                {
-                    string[] items = line.Split(';');
-
-                    if (int.TryParse(items[1], out int accessLevel) && accessLevel >= userAccessLevel) //nur Benutzer die max userAccessLevel haben
-                    {
-                        sb.Append($"<tr><td onclick='getAccount(this.parentNode)' class='w3-button material-icons' style='width:50px;'>edit</td>");
-                        sb.Append($"<td>{items[0]}</td><td>{accessLevel}</td></tr>");
-                    }
-                }
-
-                sb.AppendLine("</table>");
-
-                return sb.ToString();
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-                //return false;
-            }
-        }
 
         public static string Alert(int prio, string header, string content)
         {
@@ -342,12 +215,25 @@ namespace S7.NET.web
 
             return sb.ToString();
         }
+  
+        /// <summary>
+        /// Liest den angemeldeten Benutzer aus. Wenn kein passender Eintrag gefunden wird Benutzer 'None', AccessLevel 0
+        /// </summary>
+        /// <param name="context"></param>
+        /// <returns></returns>
+        internal static User GetUserFromCookie(IHttpContext context)
+        {
+            User user = new User
+            {
+                Name = "None",
+                AccessLevel = 0
+            };
+
+            if (ReadCookies(context).TryGetValue("WebVisuId", out string guid))
+                _ = Server.LogedInHash.TryGetValue(guid, out user);
+     
+            return user;
+        }
     }
 
-    public class Person
-    {
-        public string Name { get; set; }
-
-        public int Level { get; set; }
-    }
 }

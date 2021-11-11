@@ -14,7 +14,7 @@
     }
 </style>
 <div class="w3-bar w3-black w3-border-bottom">
-    <div class="w3-bar-item w3-button w3-border-right w3-blue w3-padding w3-center" style="width:15%" onclick="w3_open()"><b>Kreutzträger</b></div>
+    <div class="w3-bar-item w3-button w3-border-right w3-blue w3-padding w3-center" style="width:15%" onclick="w3_toggle('Sidebar')"><b>Kreutzträger</b></div>
 
     <a onclick="document.getElementById('login').style.display = 'block';document.getElementById('currentPage').value = window.location.href;" class="w3-bar-item w3-button w3-border-right material-icons #LOGEDIN#" title="#USERNAME#">vpn_key</a>
     <a href="#" class="w3-bar-item w3-button w3-border-right material-icons">settings_remote</a>
@@ -57,4 +57,4 @@
     </div>
 </div>
 
-<div id="red" class="w3-magenta w3-display-bottom"></div>
+<div id="message" class="w3-pink w3-display-bottom"></div>

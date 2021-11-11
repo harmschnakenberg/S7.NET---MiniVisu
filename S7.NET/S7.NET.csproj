@@ -177,6 +177,7 @@
     <Compile Include="Web\Routes.cs" />
     <Compile Include="Web\Server.cs" />
     <Compile Include="Web\Startup.cs" />
+    <Compile Include="Web\Benutzerverwaltung.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

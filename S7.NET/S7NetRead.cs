@@ -184,6 +184,58 @@ namespace S7.NET
             return json;
         }
 
+
+        public static void PlcWriteOnceAsync(Plc plc, string tagName, string tagValue)
+        {
+            tagValue = tagValue.Trim();
+
+            Console.WriteLine($"Scheibe {tagName} = {tagValue}");
+            try
+            {
+                if (!plc.IsConnected)
+                {
+                    plc.Close();
+                    plc.Open();
+                }
+
+                if (!plc.IsConnected) return;
+
+                string[] tag = tagName.Split('.');
+
+                if (tag.Length == 1)
+                    return;
+                else if (tag.Length == 2)
+                {
+                    if (tag[1].StartsWith("DBD") && double.TryParse(tagValue, out double valReal)) //REAL
+                        plc.Write(tagName, valReal);
+                    else if (tag[1].StartsWith("DBW") && short.TryParse(tagValue, out short valShort)) //INT; WORD = ushort
+                        plc.Write(tagName, valShort);
+                    else if (tag[1].StartsWith("DINT") && int.TryParse(tagValue, out int valInt)) //DINT
+                        plc.Write(tagName, valInt);
+                }
+                else if (tag.Length > 2)
+                {
+                    if (tagValue == "true")
+                        plc.Write(tagName, true);
+                    else if (tagValue == "false")
+                        plc.Write(tagName, false);
+                }
+   
+
+            }
+            catch (PlcException plc_ex)
+            {
+                Console.WriteLine(plc_ex.Message);
+                plc.Close();
+            }
+            catch (Exception ex)
+            {
+                plc.Close();
+                Console.WriteLine(ex.Message);
+                throw new Exception("PlcWriteOnceAsync() " + ex.Message);
+            }
+        }
+
     }
 }
 

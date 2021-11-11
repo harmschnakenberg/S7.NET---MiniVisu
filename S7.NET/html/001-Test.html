@@ -8,15 +8,7 @@
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <script src="/script/read.js"></script>
-    <script>
-        function w3_open() {
-            document.getElementById("mySidebar").style.display = "block";
-        }
-
-        function w3_close() {
-            document.getElementById("mySidebar").style.display = "none";
-        }
-    </script>
+  
 </head>
 <body>
 
@@ -25,7 +17,7 @@
 
     <!-- Sidebar -->
     <div class="w3-sidebar w3-bar-block 3-card w3-gray w3-border-right w3-large w3-animate-left" style="width:15%;display:none" id="Sidebar">
-        <button onclick="w3_close()" class="w3-bar-item w3-large w3-button w3-right-align">&times;</button>
+        <!--<button onclick="w3_close()" class="w3-bar-item w3-large w3-button w3-right-align">&times;</button>-->
         <a href="/1" class="w3-bar-item w3-button w3-border-bottom">Verbraucher</a>
         <a href="/2" class="w3-bar-item w3-button w3-border-bottom">K&auml;ltezentrale</a>
         <a href="/3" class="w3-bar-item w3-button w3-border-bottom">Schaltschr&auml;nke</a>
@@ -36,33 +28,7 @@
 
     <!-- Page Content -->
     <div class="w3-gray">
-        <!--<button class="w3-button w3-teal w3-xlarge" onclick="w3_open()">☰</button>-->
-        <!-- Menu -->
-        <div class="w3-bar w3-black w3-border-bottom">
-            <div class="w3-button w3-left w3-blue w3-border-right w3-padding w3-center" style="width:15%" onclick="w3_open()"><b>Kreutzträger</b></div>
-
-            <a href="#" class="w3-bar-item w3-button w3-gray w3-border-right material-icons">vpn_key</a>
-            <a href="#" class="w3-bar-item w3-button w3-gray w3-border-right material-icons">settings_remote</a>
-            <a href="#" class="w3-bar-item w3-button w3-gray w3-border-right material-icons">sms</a>
-            <a href="#" class="w3-bar-item w3-button w3-gray w3-border-right material-icons">settings_input_component</a>
-            <a href="#" class="w3-bar-item w3-button w3-gray w3-border-right material-icons">cast</a>
-
-            <div class="w3-quarter w3-padding w3-right" style="width:15%">
-                <span class="IW" id="DB10.DBW10">HH</span>:
-                <span class="IW" id="DB10.DBW12">mm</span>:
-                <span class="IW" id="DB10.DBW14">ss</span>
-                <span class="IW w3-right" id="DB10.DBW8">TTT</span>
-            </div>
-
-            <a href="#" class="w3-bar-item w3-button w3-gray w3-right w3-border-right material-icons">power_settings_new</a>
-            <a href="#" class="w3-bar-item w3-button w3-gray w3-right w3-border-right material-icons">menu</a>
-            <a href="#" class="w3-bar-item w3-button w3-gray w3-right w3-border-right material-icons">keyboard</a>
-            <a href="#" class="w3-bar-item w3-button w3-gray w3-right w3-border-right material-icons">engineering</a>
-            <a href="#" class="w3-bar-item w3-button w3-gray w3-right w3-border-right material-icons">notifications</a>
-            <div class="w3-rest w3-padding w3-center w3-border-right">Bildtitel</div>
-
-        </div>
-
+      
         <div class="w3-container">
             <h1>Sollwerte</h1>
             <!-- Zeile 1 -->

@@ -28,6 +28,12 @@ namespace S7.NET
             {
                 restServer = RestServerBuilder.From<Startup>().Build();
 
+                foreach (GlobalResponseHeaders item in restServer.GlobalResponseHeaders)
+                {
+                    if (item.Name == "Server") //Default Global Header für Server führt zu Warnung in Edge
+                        item.Value = "kreutztraeger";                    
+                }
+
                 restServer.AfterStarting += (s) =>
                 {
                     Process.Start("explorer", s.Prefixes.First().Replace("+", System.Net.Dns.GetHostName()));
@@ -60,6 +66,8 @@ namespace S7.NET
         public string Name { get; set; }
 
         public int AccessLevel { get; set; }
+
+        public string EncyptedPassword { get; set; }
 
         //Hier können später noch Eigenschaften ergänzt werden (Berechtigung)
 
